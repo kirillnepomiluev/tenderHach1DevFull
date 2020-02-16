@@ -1,5 +1,6 @@
 package ru.tenderhack.model;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class Shop {
 	private String email;
 	
 	@Builder.Default
+//	@JacksonXmlElementWrapper(useWrapping = false)
 	private List<Currency> currencies = List.of(Currency.builder().id("RUR").rate(1).build());
 	
 	@Builder.Default
