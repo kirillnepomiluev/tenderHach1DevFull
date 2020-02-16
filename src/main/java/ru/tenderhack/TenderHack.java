@@ -33,10 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Text;
 import ru.tenderhack.converter.Converter3;
-import ru.tenderhack.model.Catalog;
-import ru.tenderhack.model.Offer;
-import ru.tenderhack.model.Offers;
-import ru.tenderhack.model.Shop;
+import ru.tenderhack.model.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +73,7 @@ public class TenderHack extends Application {
 		shopGrid.add(new Label("Url:"), 0, 1);
 		shopGrid.add(shopUrl, 1, 1);
 
-		TableView<List<String>> table = new TableView<>();
+		TableView<Row> table = new TableView<>();
 		
 		HBox hBox = new HBox(chooseFile, destination, shopButton, parseButton);
 		hBox.setSpacing(20);
@@ -101,13 +98,13 @@ public class TenderHack extends Application {
 		options.add("vendorCode");
 		options.add("country_of_origin");
 		options.add("categoryId");
-		options.add("subcategory");
-		options.add("dimensions-long");
-		options.add("dimensions-width");
-		options.add("dimensions-height");
+//		options.add("subcategory");
+//		options.add("dimensions-long");
+//		options.add("dimensions-width");
+//		options.add("dimensions-height");
 		options.add("param-material");
 		options.add("param-diameter");
-		options.add("manufacturer_warranty");
+//		options.add("manufacturer_warranty");
 		options.add("param-color");
 		options.add("weight");
 		options.add("param-volume");
@@ -143,26 +140,43 @@ public class TenderHack extends Application {
 						.max()
 						.orElseThrow();
 				
-				TableColumn<List<String>, String> visibilityColumn = new TableColumn<>("Visibility");
+				TableColumn<Row, String> visibilityColumn = new TableColumn<>("Visibility");
 				table.getColumns().add(visibilityColumn);
 				visibilityColumn.setCellFactory(c -> {
-					TableCell<List<String>, String> tableCell = new TableCell<>();
-					CheckBox checkBox = new CheckBox();
-					checkBox.setSelected(true);
-					tableCell.setGraphic(checkBox);
-					return tableCell;
+					TableCell<Row, String> cell = new TableCell<>();
+					
+					cell.setOnMouseClicked(mc -> {
+						cell.getTableRow().getItem().setVisible(!cell.getTableRow().getItem().isVisible());
+						
+						if (cell.getTableRow().getItem().isVisible()) {
+							cell.setStyle("color: green");
+						} else {
+							cell.setStyle("color: red");
+						}
+					});
+					
+					return cell;
 				});
 				
+//				visibilityColumn.setCellFactory(c -> {
+//					TableCell<Row, String> tableCell = new TableCell<>();
+//					CheckBox checkBox = new CheckBox();
+//					checkBox.setSelected(true);
+//					tableCell.setGraphic(checkBox);
+//					return tableCell;
+//				});
+
 				IntStream.range(0, columnCount)
 				         .mapToObj(i -> {
-					         TableColumn<List<String>, String> column = new TableColumn<>();
+					         TableColumn<Row, String> column = new TableColumn<>();
 					         column.setGraphic(new ComboBox<>(FXCollections.observableArrayList(options)));
-					         column.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().get(i)));
+					         column.setCellValueFactory(f -> new SimpleStringProperty(f.getValue().getLine().get(i)));
 					         return column;
 				         })
 				         .forEach(table.getColumns()::add);
 				
-				table.getItems().addAll(data.stream().skip(3).collect(Collectors.toList()));
+//				table.getItems().addAll(data.stream().skip(3).collect(Collectors.toList()));
+				table.getItems().addAll(data.stream().map(l -> new Row(true, l)).collect(Collectors.toList()));
 				
 				int documentType = calculateType(data);
 				System.out.println("documentType = " + documentType);
@@ -177,14 +191,21 @@ public class TenderHack extends Application {
 							.range(0, table.getColumns().size())
 							.skip(1)
 							.mapToObj(i -> {
-								TableColumn<List<String>, String> column = (TableColumn<List<String>, String>) table.getColumns().get(i);
+								TableColumn<Row, String> column = (TableColumn<Row, String>) table.getColumns().get(i);
 								String name = ((ComboBox<String>) column.getGraphic()).getSelectionModel().getSelectedItem();
 								return new AbstractMap.SimpleEntry<>(i - 1, name);
 							})
 							.filter(ee -> ee.getValue() != null && !ee.getValue().equals("ignore"))
 							.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 					
-					List<Offer> offers = new Converter3().convert(fieldMap, data);
+					List<List<String>> newData = table
+							.getItems()
+							.stream()
+							.filter(Row::isVisible)
+							.map(Row::getLine)
+							.collect(Collectors.toList());
+					
+					List<Offer> offers = new Converter3().convert(fieldMap, newData);
 					
 					JacksonXmlModule module = new JacksonXmlModule();
 					XmlMapper mapper = new XmlMapper(module);

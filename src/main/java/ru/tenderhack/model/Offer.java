@@ -15,10 +15,10 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class Offer {
 	
-	@XmlAttribute
+	@JacksonXmlProperty(isAttribute = true)
 	private Integer id;
 	
-	@XmlAttribute
+	@JacksonXmlProperty(isAttribute = true)
 	private Boolean available;
 	
 	private String currencyId;
