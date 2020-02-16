@@ -1,21 +1,130 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<yml_catalog date="2020-02-16 16:01">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE yml_catalog SYSTEM "shops.dtd">
+<yml_catalog date="2020-02-16 16:33">
   <shop>
+    <name>123123</name>
+    <url>123123123</url>
+    <currencies>
+      <currencies id="RUR" rate="1"/>
+    </currencies>
     <offers>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
-      <offers/>
+      <offers id="601903">
+        <name>Освежитель воздуха аэрозольный 300 мл МЕЛОДИЯ "МОРСКОЙ", 601903</name>
+        <param name="Тип товара">аэрозольный</param>
+        <param name="Отдушка">свежесть</param>
+        <param name="Объем/вес" unit="мл/г.">300</param>
+      </offers>
+      <offers id="600189">
+        <name>Мыло-крем жидкое ЛАЙМА PROFESSIONAL, 5 л, "Яблоко", с антибактериальным эффектом, 600189</name>
+        <param name="Объем" unit="мл">5000</param>
+        <param name="Мыло-крем">да</param>
+        <param name="Подходящий тип кожи">для всех типов</param>
+        <param name="Эффект от использования">антибактериальный</param>
+        <param name="Серия &quot;Professional&quot;">да</param>
+        <param name="Отдушка">фруктовая</param>
+        <param name="Тип дозирования">нет</param>
+        <param name="Вид упаковки">канистра</param>
+        <param name="Цвет">зелёный.</param>
+      </offers>
+      <offers id="605305">
+        <name>Насадка МОП плоская 60 см для швабры-рамки, карманы, нашивной хлопок, ЛАЙМА Expert, 605305</name>
+        <param name="Тип насадки">плоская для складной рамки</param>
+        <param name="Материал">хлопок</param>
+        <param name="Крепление насадки">карманы (для складных рамок)</param>
+        <param name="Максимальный объем впитывания" unit="мл">600</param>
+        <param name="Длина" unit="см">60</param>
+        <param name="Ширина" unit="см">14</param>
+        <param name="Длина ворса" unit="см">3.5</param>
+        <param name="Цвет">бежевый</param>
+        <param name="Вес" unit="г.">230</param>
+      </offers>
+      <offers id="603943">
+        <name>Тряпки для мытья пола, КОМПЛЕКТ 3 шт., микрофибра, 50х60 см, зелёные, ЛЮБАША ЭКОНОМ, 603943</name>
+        <param name="Материал">микрофибра</param>
+        <param name="Длина" unit="см">60</param>
+        <param name="Ширина" unit="см">50</param>
+        <param name="Количество в комплекте" unit="шт">3</param>
+        <param name="Плотность" unit="г/м2">260</param>
+        <param name="Цвет">зеленый</param>
+        <param name="Упаковка">подвес с биркой.</param>
+      </offers>
+      <offers id="601692">
+        <name>Средство для удаления ржавчины и известкового налета, 750 г, САНОКС гель</name>
+        <param name="Объем/Вес" unit="мл/г">750</param>
+        <param name="Эффективно удаляет">жировые загрязнения, известковый налет, неприятный запах, органические загрязнения, ржавчину</param>
+        <param name="Подходит для">фаянса, эмали</param>
+        <param name="Форма выпуска">гель</param>
+        <param name="Уничтожает возбудителей стафилококка и кишечных инфекций">да</param>
+        <param name="Содержит">ускоритель чистки, щавелевую кислоту</param>
+        <param name="pH">4</param>
+        <param name="Дозатор">отсутствует</param>
+        <param name="Упаковка">флакон.</param>
+      </offers>
+      <offers id="601746">
+        <name>Чистящее средство 1 л, DOMESTOS (Доместос) "Лимонная свежесть", с отбеливающим эффектом</name>
+        <param name="Форма выпуска">гель</param>
+        <param name="Объем/вес" unit="мл/г">1000</param>
+        <param name="Эффект от использования">дезинфекция, отбеливание</param>
+        <param name="Подходит для поверхностей">кафель, фаянс, хром</param>
+        <param name="Отдушка">цитрус</param>
+        <param name="Содержит">хлор</param>
+        <param name="pH">11</param>
+        <param name="Дозатор">"утенок"</param>
+        <param name="Упаковка">бутыль.</param>
+      </offers>
+      <offers id="603932">
+        <name>Салфетка универсальная, микрофибра, 30х30 см, зеленая, ЛАЙМА, 603932</name>
+        <param name="Материал">микрофибра</param>
+        <param name="Применение">универсальное</param>
+        <param name="Количество в упаковке" unit="шт">1</param>
+        <param name="Плотность" unit="г/м2">220</param>
+        <param name="Длина" unit="см">30</param>
+        <param name="Ширина" unit="см">30</param>
+        <param name="Цвет">зелёный</param>
+        <param name="Упаковка">пакет с европодвесом.</param>
+      </offers>
+      <offers id="600470">
+        <name>Полотенце ВАФЕЛЬНОЕ отбеленное, 40х80 см, плотность 160 (±10) г/м2, ЛАЙМА, 600470</name>
+        <param name="Тип полотенца">вафельное отбеленное</param>
+        <param name="Количество в упаковке">1</param>
+        <param name="Материал">вафельнная ткань</param>
+        <param name="Плотность" unit="г/м2">160</param>
+        <param name="Высота" unit="см">80</param>
+        <param name="Ширина" unit="см">40</param>
+        <param name="Цвет">белый</param>
+        <param name="Упаковка">плотный полиэтилен.</param>
+      </offers>
+      <offers id="601554">
+        <name>Губки для мытья посуды ЛАЙМА MAXI, комплект 5 шт., чистящий слой (абразив), 27х96х64 мм, 601554</name>
+        <param name="Применение">для мытья посуды</param>
+        <param name="Количество в упаковке" unit="шт">5</param>
+        <param name="Чистящий слой">абразивный</param>
+        <param name="Высота" unit="мм">27</param>
+        <param name="Ширина" unit="мм">96</param>
+        <param name="Глубина" unit="мм">64</param>
+        <param name="Материал">поролон+абразив</param>
+        <param name="Цвет">микс</param>
+        <param name="Упаковка">пакет.</param>
+      </offers>
+      <offers id="602371">
+        <name>Мыло хозяйственное 72%, 200 г, МЕРИДИАН, без упаковки</name>
+        <param name="Вес" unit="г">200</param>
+        <param name="Отдушка">отсутствует</param>
+        <param name="Количество в упаковке" unit="шт">1</param>
+        <param name="Назначение">для мытья рук, для стирки</param>
+        <param name="Эффект от использования">против пятен</param>
+        <param name="Содержание жирных кислот" unit="%">72</param>
+        <param name="Производится в соответствии с ГОСТ 30266-95">да</param>
+        <param name="Вид упаковки">нет.</param>
+      </offers>
+      <offers id="601609">
+        <name>Средство для мытья стекол и зеркал 500 мл, ЛАЙМА PROFESSIONAL, распылитель, 601609</name>
+        <param name="Объем" unit="мл">500</param>
+        <param name="Наличие распылителя">да</param>
+        <param name="Обрабатываемая поверхность">дерево, зеркало, кафель, металл, мрамор, пластик, стекло, эмаль</param>
+        <param name="Эффект от использования">защищает от пыли, не оставляет разводов, придает блеск</param>
+        <param name="Отдушка">нет отдушки.</param>
+      </offers>
     </offers>
-    <currency>
-      <currency id="RUR" rate="1"/>
-    </currency>
   </shop>
 </yml_catalog>
