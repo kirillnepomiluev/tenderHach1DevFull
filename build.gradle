@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+//    id 'com.ewerk.gradle.plugins.jaxb2' version '1.0.10'
+}
+
+group 'org.example'
+version '0.1'
+
+sourceCompatibility = 11
+
+application.mainClassName = 'ru.tenderhack.TenderHack'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.poi:poi:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml:4.1.2'
+    implementation 'org.apache.poi:poi-ooxml-schemas:4.1.2'
+    implementation 'org.apache.poi:poi-scratchpad:4.1.2'
+    implementation 'org.apache.poi:poi-excelant:4.1.2'
+    implementation 'org.projectlombok:lombok:1.18.12'
+}
+
+//compileJava {
+//    options.compilerArgs += "--add-modules java.xml.bind"
+//}
+
+javafx {
+    version = 11
+    modules = ["javafx.controls", "javafx.fxml"]
+}
+
+//jaxb2 {
+//    xjc {
+//        'generate-java' {
+//            basePackage = 'ru.tenderhack'
+//            schema = 'shops_with_byn.xsd'
+//        }
+//    }
+//}
+
