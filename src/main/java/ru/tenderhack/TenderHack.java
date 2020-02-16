@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -13,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.poi.extractor.POIOLE2TextExtractor;
@@ -29,12 +33,15 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Text;
 import ru.tenderhack.converter.Converter3;
+import ru.tenderhack.model.Catalog;
 import ru.tenderhack.model.Offer;
 import ru.tenderhack.model.Offers;
 import ru.tenderhack.model.Shop;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +54,13 @@ public class TenderHack extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		Button parseButton = new Button("Parse");
 		Button chooseFile = new Button("Choose File");
+		Button destination = new Button("Destination file");
 		Button shopButton = new Button("Shop");
+		Button parseButton = new Button("Parse");
 //		shopButton.setVisible(false);
 		
-		
+		ObjectProperty<File> destinationFile = new SimpleObjectProperty<>();
 		
 		GridPane shopGrid = new GridPane();
 		shopGrid.setVgap(10);
@@ -70,7 +78,7 @@ public class TenderHack extends Application {
 
 		TableView<List<String>> table = new TableView<>();
 		
-		HBox hBox = new HBox(chooseFile, shopButton, parseButton);
+		HBox hBox = new HBox(chooseFile, destination, shopButton, parseButton);
 		hBox.setSpacing(20);
 		hBox.setPadding(new Insets(10));
 		
@@ -105,6 +113,11 @@ public class TenderHack extends Application {
 		options.add("param-volume");
 		options.add("param set");
 		
+		destination.setOnAction(sdjkfsdf -> {
+			DirectoryChooser chooser = new DirectoryChooser();
+			destinationFile.set(chooser.showDialog(stage));
+		});
+		
 		chooseFile.setOnAction(eee -> {
 			try {
 				
@@ -120,6 +133,8 @@ public class TenderHack extends Application {
 				table.getItems().clear();
 				table.getColumns().clear();
 				shopButton.setVisible(false);
+				
+				stage.setTitle("Tender Hack - Loading file");
 				
 				List<List<String>> data = readCells(file);
 				int columnCount = data
@@ -154,6 +169,8 @@ public class TenderHack extends Application {
 				
 				shopButton.setVisible(true);
 				
+				stage.setTitle("Tender Hack");
+				
 				parseButton.setOnAction(e -> {
 					
 					Map<Integer, String> fieldMap = IntStream
@@ -174,14 +191,27 @@ public class TenderHack extends Application {
 					mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 					mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 					mapper.enable(SerializationFeature.INDENT_OUTPUT);
+					mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
 					
 					Shop shop = new Shop();
 					shop.setName(shopName.getText());
 					shop.setUrl(shopUrl.getText());
 					shop.setOffers(offers);
 					
+					Catalog catalog = new Catalog();
+					catalog.setShop(shop);
+					
 					try {
-						mapper.writeValue(new File("result.xml"), shop);
+						File writeFile;
+						if (destinationFile.get() == null) {
+							writeFile = new File("result.xml");
+						} else {
+							writeFile = Paths.get(destinationFile.get().toString()).resolve("result.xml").toFile();
+						}
+						
+						Files.writeString(Paths.get(writeFile.toString()),"<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+						
+						mapper.writeValue(writeFile, catalog);
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}
