@@ -27,7 +27,8 @@ public class Shop {
 	private String email;
 	
 	@Builder.Default
-//	@JacksonXmlElementWrapper(useWrapping = false)
+	@JacksonXmlProperty(localName = "currency")
+	@JacksonXmlElementWrapper(localName = "currencies")
 	private List<Currency> currencies = List.of(Currency.builder().id("RUR").rate(1).build());
 	
 	@Builder.Default
