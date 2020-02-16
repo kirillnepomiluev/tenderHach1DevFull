@@ -1,12 +1,28 @@
 package ru.tenderhack.model;
 
-import lombok.ToString;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
+
+@JacksonXmlRootElement
 public class Param {
 	
+	@JacksonXmlProperty(isAttribute = true)
 	private String name;
+	
+	@JacksonXmlProperty(isAttribute = true)
 	private String unit;
+	
+	@JacksonXmlText
 	private String value;
 	
 	public Param(String string) {
