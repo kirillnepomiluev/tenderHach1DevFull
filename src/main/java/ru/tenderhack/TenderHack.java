@@ -215,7 +215,7 @@ public class TenderHack extends Application {
 					mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 					mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 					mapper.enable(SerializationFeature.INDENT_OUTPUT);
-//					mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+					mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
 					
 					Shop shop = new Shop();
 					shop.setName(shopName.getText());
@@ -234,8 +234,8 @@ public class TenderHack extends Application {
 						}
 						
 						try(BufferedWriter writer = new BufferedWriter(Files.newBufferedWriter(Paths.get(writeFile.toString())))) {
-							writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-							writer.write("<!DOCTYPE yml_catalog SYSTEM \"shops.dtd\">\n");
+//							writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+//							writer.write("<!DOCTYPE yml_catalog SYSTEM \"shops.dtd\">\n");
 							mapper.writeValue(writer, catalog);
 						}
 						
