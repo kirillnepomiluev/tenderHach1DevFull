@@ -14,7 +14,6 @@ public class Converter3 {
 	public List<Offer> convert(Map<Integer, String> fieldMap, List<List<String>> data) {
 		return data
 				.stream()
-				.skip(5)
 				.map(line -> constructOffer(fieldMap, line))
 				.collect(Collectors.toList());
 	}

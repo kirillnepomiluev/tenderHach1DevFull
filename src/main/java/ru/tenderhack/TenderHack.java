@@ -147,26 +147,24 @@ public class TenderHack extends Application {
 				visibilityColumn.setCellFactory(c -> {
 					TableCell<Row, String> cell = new TableCell<>();
 					
+					cell.setStyle("-fx-background-color: green");
+					
 					cell.setOnMouseClicked(mc -> {
+						System.out.println("clicked");
 						cell.getTableRow().getItem().setVisible(!cell.getTableRow().getItem().isVisible());
+						System.out.println(cell.getTableRow().getItem().isVisible());
 						
 						if (cell.getTableRow().getItem().isVisible()) {
-							cell.setStyle("color: green");
+							cell.setStyle("-fx-background-color: green");
 						} else {
-							cell.setStyle("color: red");
+							cell.setStyle("-fx-background-color: red");
 						}
+						
+						System.out.println(cell.getStyle());
 					});
 					
 					return cell;
 				});
-				
-//				visibilityColumn.setCellFactory(c -> {
-//					TableCell<Row, String> tableCell = new TableCell<>();
-//					CheckBox checkBox = new CheckBox();
-//					checkBox.setSelected(true);
-//					tableCell.setGraphic(checkBox);
-//					return tableCell;
-//				});
 
 				IntStream.range(0, columnCount)
 				         .mapToObj(i -> {
@@ -177,11 +175,10 @@ public class TenderHack extends Application {
 				         })
 				         .forEach(table.getColumns()::add);
 				
-//				table.getItems().addAll(data.stream().skip(3).collect(Collectors.toList()));
 				table.getItems().addAll(data.stream().map(l -> new Row(true, l)).collect(Collectors.toList()));
 				
-				int documentType = calculateType(data);
-				System.out.println("documentType = " + documentType);
+//				int documentType = calculateType(data);
+//				System.out.println("documentType = " + documentType);
 				
 				shopButton.setVisible(true);
 				
@@ -200,12 +197,16 @@ public class TenderHack extends Application {
 							.filter(ee -> ee.getValue() != null && !ee.getValue().equals("ignore"))
 							.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 					
+					System.out.println("data size = " + data.size());
+					
 					List<List<String>> newData = table
 							.getItems()
 							.stream()
 							.filter(Row::isVisible)
 							.map(Row::getLine)
 							.collect(Collectors.toList());
+					
+					System.out.println("new data size = " + newData.size());
 					
 					List<Offer> offers = new Converter3().convert(fieldMap, newData);
 					
